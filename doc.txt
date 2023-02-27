@@ -1,0 +1,167 @@
+command          function                                   syntax
+
+int        assign  int variable                                 int variable_name 10
+str        assign string variable                               str variable_name text
+rnd        assign random value between range to variable        rnd variable_name min_number(has to be a direct integer) max_number(has to be a direct integer)
+ini        take input integer into variable                     inp_int variable_name
+ins        take input string into variable                      inp_str variable_name
+
+inc        increment variable                                   inc variable_name 
+dec        decrement variable                                   dec variable_name
+add        add variable to other variable                       add var1 var2
+sub        substract variable from other variable               sub var1 var2
+mul        multiply variable with second variable               mul var1 var2
+div        divide variable with second variable                 mul var1 var2
+con        add string to other string                           con str1 str2
+
+prt        print int variable                                   prt variable_name
+pra        print ascii value of variable                        pra variable_name
+prs        print string variable                                prs string_variable
+
+hlt        halt                                                 hlt
+hz         halt if variable is zero                             hz variable_name
+hbz        halt if bigger than zero                             hbz variable_name
+hlz        halt if less than zero                               hlz variable_name
+hb         halt if bigger than second variable                  hb var1 var2
+hl         halt if smaller than second variable                 hl var1 var2
+hne        halt if not equal                                    hne var1 var2
+he         halt if equal                                        he var1 var2
+
+jmp        jump                                                 jmp label_name
+jz         jump if zero                                         jz var1 label_name
+jgz        jump if greaater than zero                           jgz var1 label_name
+jlz        jump less than zero                                  jz var1 label_name
+je         jump if equal                                        je var1 label_name
+jg         jump if greater                                      jg var1 label_name
+jl         jump if less                                         jl var1 label_name
+jnz        jump if not zero                                     jnz var1 label_name
+jne        jump if not equal                                    jne var1 var2 label_name
+
+not        if variable is zero make it 1 else make it 0         not var1
+
+slp        sleep(milliseconds)                                  slp 1000
+
+push       push variables value to the top of the stack(int)    push var1
+pop        pop value from pop of the stack into variable(int)   pop var1
+
+imp        import a file into a program                         imp filename
+
+lbl        create a label                                       lbl label_name
+
+del        delete variable(any type)                            del variable_name
+
+cmp        compare if 2 strings are equal and jump if it is     cmp var1 var2 label_name
+
+ret        return to the line + 1 a label was called from       ret
+
+;          comment(you have to use a space after it)            ; my comment                                              
+
+example programs and libraries:
+letters.dlib(for easier printing):
+    mov a 97
+    mov b 98
+    mov c 99
+    mov d 100
+    mov e 101
+    mov f 102
+    mov g 103
+    mov h 104
+    mov i 105
+    mov j 106
+    mov k 107
+    mov l 108
+    mov m 109
+    mov n 110
+    mov o 111
+    mov p 112
+    mov q 113
+    mov r 114
+    mov s 115
+    mov t 116
+    mov u 117
+    mov v 118
+    mov w 119
+    mov x 120
+    mov y 121
+    mov z 122
+    mov space 9000
+    mov endl 9001
+
+print hello world:
+    str var1 hello_world
+	prs var1
+
+number guessing game:
+rnd enemy_num 0 10
+set guesses 0
+lbl start
+inp player_num
+
+je player_num enemy_num equal //call win
+jg player_num enemy_num bigger //call bigger
+jl player_num enemy_num smaller //call smaller
+
+hlt
+
+lbl equal
+imp letters.pasm
+prs w
+prs i 
+prs n
+prs endl
+inc guesses
+prt guesses
+hlt
+
+lbl smaller
+imp letters.pasm
+prs l
+prs o 
+prs w
+prs endl
+inc guesses
+jmp start
+hlt
+
+lbl bigger
+imp letters.pasm
+prs h
+prs i 
+prs g
+prs h
+prs endl
+inc guesses
+jmp start
+hlt
+
+password generator:
+	set password_lenght 30 //this program is used to generate passwords that are secure
+	set i 0
+
+	lbl loop
+	rnd character 97 122
+	prs character
+	inc i
+	jl i password_lenght loop
+	hlt
+
+factorial calculator:
+	inp n ;input the number to calculate the factorial of
+	set fact 1 ;this contains the result
+	lbl loop 
+	mul fact n
+	dec n
+	jnz n loop
+	prt fact  ; Output the result
+	hlt
+	
+age to second calculator:
+	inp age
+	set convert 365
+	set var 60
+	set var1 24
+	mul age convert
+	mul age var1
+	mul age var
+	mul age var
+	prt age
