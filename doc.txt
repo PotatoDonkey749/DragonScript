@@ -5,6 +5,7 @@ str        assign string variable                               str variable_nam
 rnd        assign random value between range to variable        rnd variable_name min_number(has to be a direct integer) max_number(has to be a direct integer)
 ini        take input integer into variable                     inp_int variable_name
 ins        take input string into variable                      inp_str variable_name
+str/       convert integer into string                          str/ string integer
 
 inc        increment variable                                   inc variable_name 
 dec        decrement variable                                   dec variable_name

@@ -319,6 +319,11 @@ int interpret(std::vector<std::string> instructions) {
         it = line_called_from;
     } else if(op == ";") {
         continue;
+    } else if(op == "str/") {
+        char result[50];
+        int num = registers[y];
+        sprintf(result, "%d", num);
+        strings[x] = result;
     } else if(op == "lbl") {
         continue;
     } else {
