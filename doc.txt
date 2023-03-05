@@ -2,7 +2,7 @@ command          function                                   syntax
 
 int        assign  int variable                                 int variable_name 10
 str        assign string variable                               str variable_name text
-rnd        assign random value between range to variable        rnd variable_name min_number(has to be a direct integer) max_number(has to be a direct integer)
+rnd        assign random value between range to variable        rnd variable_name var1 var2
 ini        take input integer into variable                     inp_int variable_name
 ins        take input string into variable                      inp_str variable_name
 str/       convert integer into string                          str/ string integer
