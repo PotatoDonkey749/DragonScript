@@ -279,8 +279,8 @@ int interpret(std::vector<std::string> instructions) {
     } else if(op == "slp") {
         delay(std::stoi(x));
     } else if(op == "rnd") {
-        int min_range = std::stoi(y);
-        int max_range = std::stoi(z);
+        int min_range = registers[y];
+        int max_range = registers[z];
 
         std::random_device device;
         std::mt19937 generator(device());
