@@ -13,7 +13,9 @@
 #include <random>
 #include <map>
 #include <stdio.h>
+#include <cstring>
 #include "dragonscript.h"
+#include "drawing.h"
 
 void delay(int milliseconds) {
     long pause;
@@ -335,6 +337,20 @@ int interpret(std::vector<std::string> instructions) {
 
         strcpy(command, const_char_ptr);
         system(command);
+    } else if(op == "pxl") {
+        int X = std::stoi(x);
+        int Y = std::stoi(y);
+        int Z = std::stoi(z);
+        drawPixel(X, Y, Z);
+    } else if(op == "cls") {
+        // Detect the operating system
+        #ifdef _WIN32
+            // Windows command
+            system("cls");
+        #else
+            // Unix command
+            system("clear");
+        #endif
     } else if(op == "lbl") {
         continue;
     } else {
