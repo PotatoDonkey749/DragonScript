@@ -55,7 +55,9 @@ cmp        compare if 2 strings are equal and jump if it is     cmp var1 var2 la
 
 ret        return to the line + 1 a label was called from       ret
 
-;          comment(you have to use a space after it)            ; my comment                                              
+;          comment(you have to use a space after it)            ; my comment 
+
+cmd        execute terminal commands                            cmd echo hello
 
 example programs and libraries:
 letters.dlib(for easier printing):
