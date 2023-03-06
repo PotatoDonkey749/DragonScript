@@ -59,6 +59,12 @@ ret        return to the line + 1 a label was called from       ret
 
 cmd        execute terminal commands                            cmd echo hello
 
+pxi        draw pixel using integer arguements                  pxi 5 10 1
+
+pxv        draw pixel using variable arguements                 pxv x_var y_var color_var
+
+cls        clear the terminal                                   cls
+
 example programs and libraries:
 letters.dlib(for easier printing):
     mov a 97
