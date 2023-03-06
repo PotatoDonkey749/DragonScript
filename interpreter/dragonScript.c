@@ -337,11 +337,13 @@ int interpret(std::vector<std::string> instructions) {
 
         strcpy(command, const_char_ptr);
         system(command);
-    } else if(op == "pxl") {
+    } else if(op == "pxi") {
         int X = std::stoi(x);
         int Y = std::stoi(y);
         int Z = std::stoi(z);
         drawPixel(X, Y, Z);
+    } else if(op == "pxv") {
+        drawPixel(registers[x], registers[y], registers[z]);
     } else if(op == "cls") {
         // Detect the operating system
         #ifdef _WIN32
