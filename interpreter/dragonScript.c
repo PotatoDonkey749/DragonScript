@@ -324,6 +324,17 @@ int interpret(std::vector<std::string> instructions) {
         int num = registers[y];
         sprintf(result, "%d", num);
         strings[x] = result;
+    } else if(op == "cmd") {
+        char command[50];
+        const char* c = x.c_str();
+        const char* d = y.c_str();
+        const char* e = z.c_str();
+
+        std::string result = std::string(c) + " " + std::string(d) + " " + std::string(e);
+        const char* const_char_ptr = result.c_str();
+
+        strcpy(command, const_char_ptr);
+        system(command);
     } else if(op == "lbl") {
         continue;
     } else {
