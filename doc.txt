@@ -55,7 +55,7 @@ cmp        compare if 2 strings are equal and jump if it is     cmp var1 var2 la
 
 ret        return to the line + 1 a label was called from       ret
 
-;          comment(you have to use a space after it)            ; my comment 
+;          comment(you have to use a space after it)            ; my comment                                              
 
 cmd        execute terminal commands                            cmd echo hello
 
@@ -174,3 +174,365 @@ age to second calculator:
 	mul age var
 	mul age var
 	prt age
+
+crypto simulator:
+	int max_trades 10
+int balance 10000
+int fee 10
+int lambo_price 3000000
+;
+int min_start_price 1000
+int max_start_price 10000
+;
+int up_min_extra 100
+int up_max_extra 500
+;
+int down_min_extra -100
+int down_max_extra -500
+;
+int min_change -1000
+int max_change 1000
+;
+;
+rnd price min_start_price max_start_price
+int coins 0
+int lambos 0
+int bought_for 0
+;
+str buy buy 
+str sell sell
+str hold hold
+str ext exit 
+str pmp pump
+str dmp dump
+str lambo lambo
+str hld12 hold12
+str price_text price:
+str balance_text balance:
+str coins_text coins:
+str trades_text trades:
+str buy_text bought:
+str lambo_text lambos:
+;
+lbl start
+prs endl
+jmp change_price
+;
+lbl start2
+prs balance_text
+prs space
+prt balance
+prs endl
+;
+prs price_text
+prs space
+prt price
+prs endl
+;
+prs coins_text
+prs space
+prt coins
+prs endl
+;
+prs trades_text
+prs space
+prt max_trades
+prs endl
+;
+prs lambo_text
+prs space
+prt lambos
+prs endl
+;
+prs buy_text
+prs space
+prt bought_for
+prs endl
+;
+jz max_trades exit_final
+;
+str text (buy/sell/hold/exit):
+prs text 
+prs space
+; 
+ins input 
+cmp input buy buy 
+cmp input sell sell 
+cmp input hold hold
+cmp input ext exit
+cmp input pmp pump 
+cmp input dmp dump
+cmp input lambo lambuy
+cmp input hld12 hold12
+prs endl
+jmp start2
+hlt
+;
+;
+lbl buy
+str text amount:
+prs text 
+prs space 
+ini amount
+int bought_for price
+;
+int current_price price 
+mul current_price amount
+jg current_price balance low_money
+sub balance current_price
+dec max_trades
+add coins amount
+rnd extra_change up_min_extra up_max_extra
+mul extra_change amount
+add extra_change price
+int amount 0
+int current_price 0
+jmp start 
+;
+lbl sell 
+str text amount:
+prs text 
+prs space 
+ini amount
+;
+int current_price price 
+mul current_price amount
+jg amount coins low_coins
+add balance current_price
+sub coins amount
+rnd extra_change down_min_extra down_min_extra
+mul extra_change amount
+sub extra_change price
+int amount 0
+int current_price 0
+jmp start 
+hlt 
+;
+;
+lbl hold
+sub balance fee
+jz balance start
+jgz balance start
+int zero 0
+int balance zero
+jmp start
+hlt
+;
+;
+lbl low_money
+str 1 You 
+str 2 don't 
+str 3 have 
+str 4 enough 
+str 5 money
+prs 1
+prs space
+prs 2
+prs space
+prs 3
+prs space
+prs 4
+prs space
+prs 5
+prs endl
+; prs endl
+jmp start
+hlt
+;
+;
+lbl low_coins
+str 1 You 
+str 2 don't 
+str 3 have 
+str 4 enough 
+str 5 coins
+prs 1
+prs space
+prs 2
+prs space
+prs 3
+prs space
+prs 4
+prs space
+prs 5
+prs endl
+; prs endl
+jmp start
+hlt
+;
+;
+lbl change_price
+rnd change min_change max_change
+add price change
+jgz price start2
+int price 100
+jmp start2
+;
+;
+lbl pump
+int min_pump 10000  
+int max_pump 100000
+rnd pump_amount min_pump max_pump
+add price pump_amount
+prs endl
+jmp start2
+hlt 
+;
+;
+lbl dump
+int min_dump -10000
+int max_dump -100000
+rnd dump_amount min_dump max_dump
+sub price pump_amount
+prs endl
+jmp start2
+hlt
+;
+;
+lbl exit
+hlt
+;
+;
+lbl exit_final
+int current_price price 
+mul current_price coins
+add balance current_price
+int coins 0
+;
+prs endl
+;
+prs balance_text
+prs space
+prt balance
+prs endl
+;
+prs price_text
+prs space
+prt price
+prs endl
+;
+prs coins_text
+prs space
+prt coins
+prs endl
+;
+hlt
+;
+;
+lbl hold12
+int mul_number1 12
+int mul_number2 12
+;
+mul mul_number1 fee
+sub balance mul_number1
+;
+rnd change min_change max_change
+mul change mul_number2
+add price change
+;
+jz price start2
+jgz price start2
+int price 100
+jmp start2
+;
+hlt
+;
+;
+lbl lambuy
+jg lambo_price balance low_money
+sub balance lambo_price
+inc lambos
+jmp start
+hlt
+
+
+
+ideas:
+Variable Assignment
+
+int
+str
+rnd
+ini
+ins
+str/
+
+Arithmetic Operations
+
+inc
+dec
+add
+sub
+mul
+div
+
+String Operations
+
+con
+
+Input/Output
+
+prt
+pra
+prs
+
+Conditional Jumps
+
+jz
+jgz
+jlz
+je
+jg
+jl
+jnz
+jne
+
+Comparison
+
+cmp
+
+Halt
+
+hlt
+hz
+hbz
+hlz
+hb
+hl
+hne
+he
+
+Control Flow
+
+jmp
+jz
+jgz
+jlz
+je
+jg
+jl
+jnz
+jne
+lbl
+ret
+
+Other
+
+not
+slp
+push
+pop
+imp
+del
+cmd
+pxi
+pxv
+cls
+
+code golf
+
+calculator
+
+tic tac toe
+
+text adventure
