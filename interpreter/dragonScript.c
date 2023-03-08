@@ -35,6 +35,28 @@ int interpret(std::vector<std::string> instructions) {
   int stack[STACK_SIZE];
   int top = -1;
   int line_called_from;
+    
+  for (int it = 0; it < instructions.size(); ++it) {
+    const auto& instruction = instructions[it];
+    if (instruction.empty()) {
+      continue;
+    }
+    std::string op, x, y, z;
+    std::istringstream iss(instruction);
+    iss >> op >> x >> y >> z;
+
+    if (op == "imp") {
+      // replace the current line with the contents of a file written after this command
+        std::string filename = x;
+        std::ifstream infile(filename);
+        std::string line;
+        int lineno = it + 1;
+        while (std::getline(infile, line)) {
+            instructions.insert(instructions.begin() + lineno, line);
+            ++lineno;
+        }
+    }
+  }
 
   for (int it = 0; it < instructions.size(); ++it) {
     const auto& instruction = instructions[it];
@@ -280,15 +302,7 @@ int interpret(std::vector<std::string> instructions) {
 
         registers[x] = random_number;
     } else if(op == "imp") {
-        // replace the current line with the contents of a file written after this command
-        std::string filename = x;
-        std::ifstream infile(filename);
-        std::string line;
-        int lineno = it + 1;
-        while (std::getline(infile, line)) {
-            instructions.insert(instructions.begin() + lineno, line);
-            ++lineno;
-        }
+        continue;
     } else if(op == "push") {
         if (top == STACK_SIZE - 1) {
             // stack is full, cannot push any more values
