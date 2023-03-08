@@ -38,6 +38,9 @@ int interpret(std::vector<std::string> instructions) {
 
   for (int it = 0; it < instructions.size(); ++it) {
     const auto& instruction = instructions[it];
+    if (instruction.empty()) {
+      continue;
+    }
     std::string op, x, y, z;
     std::istringstream iss(instruction);
     iss >> op >> x >> y >> z;
